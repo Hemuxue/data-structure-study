@@ -15,6 +15,7 @@ interface LinkInterface<T> {
   isEmpty: () => boolean;
   size: () => number;
   toString: () => string;
+  getHead: () => NodeInterface<T> | undefined;
 }
 
 class NodeClass<T> implements NodeInterface<T> {
@@ -27,7 +28,7 @@ class NodeClass<T> implements NodeInterface<T> {
   }
 }
 
-class Link<T = any> implements LinkInterface<T> {
+export default class Link<T = any> implements LinkInterface<T> {
   head: NodeInterface<T> | undefined;
   count: number;
   compareFn;
@@ -124,6 +125,10 @@ class Link<T = any> implements LinkInterface<T> {
 
   size() {
     return this.count;
+  }
+
+  getHead() {
+    return this.head;
   }
 
   toString() {
