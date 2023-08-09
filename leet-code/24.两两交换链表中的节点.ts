@@ -23,16 +23,36 @@ interface ListNode {
   next: ListNode;
 }
 
+// function swapPairs(head: ListNode | null): ListNode | null {
+//   if (!head) {
+//     return head;
+//   }
+//   let current = head;
+//   while (current?.next) {
+//     const tempValue = current.val;
+//     current.val = current.next?.val;
+//     current.next.val = tempValue;
+//     current = current.next?.next;
+//   }
+//   return head;
+// }
+
 function swapPairs(head: ListNode | null): ListNode | null {
-  if (!head) {
-    return head;
-  }
-  let current = head;
-  while (current?.next) {
-    const tempValue = current.val;
-    current.val = current.next?.val;
-    current.next.val = tempValue;
-    current = current.next?.next;
+  // const ll = new LList<number>(head)
+  // ll.swapPairs()
+  let node = head;
+  while (node?.next) {
+    let temp = node.next.next;
+    // 2->1
+    node.next.next = node;
+    // head->2
+    if (node === head) {
+      head = node.next;
+    }
+    // 1->4
+    node.next = temp && temp.next ? temp.next : temp;
+    // 更新node
+    node = temp;
   }
   return head;
 }
